@@ -76,6 +76,8 @@ const About = () => {
     }
   };
 
+  const imageUrl = "https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467897/WhatsApp_Image_2025-07-02_at_18.03.26_c682df27_siuwht.jpg";
+
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,7 +108,7 @@ const About = () => {
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
                 ) : profileImage ? (
                   <img
-                    src={profileImage}
+                    src={imageUrl}
                     alt="Arava Tejesh Kumar"
                     className="w-full h-full object-cover rounded-2xl"
                   />

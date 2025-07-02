@@ -100,7 +100,7 @@ const Projects = () => {
       title: 'Streamify - Real-Time Chat & Video App',
       description: 'A real-time chat and video calling app built with the MERN stack. Features include JWT auth, friend system, protected routes, 32+ UI themes, and advanced state management with TanStack Query.',
       technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'WebRTC', 'TanStack Query', 'Tailwind CSS'],
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://res.cloudinary.com/diqqtjz0i/image/upload/v1751466419/Screenshot_2025-07-01_173021_h4t7rs.png',
       github: 'https://github.com/Tejash12345/Stremefiy.git',
       demo: 'https://stremefiy.onrender.com',
       featured: true
@@ -109,7 +109,7 @@ const Projects = () => {
       title: 'Transfit.ai – AI-Powered Fitness Assistant',
       description: 'AI fitness app offering real-time workouts, personalized diet plans, and voice coaching using Gemini AI & Vapi. Built with Next.js, Clerk, Convex, and TailwindCSS for a seamless experience.',
       technologies: ['Next.js', 'Clerk', 'Convex', 'Tailwind CSS', 'Gemini AI', 'Vapi'],
-      image: 'https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467068/Screenshot_2025-07-02_140302_ywpycd.png',
       github: 'https://github.com/Tejash12345/Titanfit_ai.git',
       demo: 'https://titanfit-ai-yp6t-26zm9nzl2-tejesh-kumars-projects.vercel.app/',
       featured: true
@@ -118,7 +118,7 @@ const Projects = () => {
       title: 'Chatter.app – Real-Time Chat App',
       description: 'Full-stack real-time chat app built with MERN, featuring JWT auth, live messaging via Socket.io, Zustand state management, and a responsive UI with TailwindCSS and Daisy UI.',
       technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'Zustand', 'Tailwind CSS', 'Daisy UI'],
-      image: 'https://images.pexels.com/photos/6078120/pexels-photo-6078120.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467036/Screenshot_2025-07-02_135649_kbn4wr.png',
       github: 'https://github.com/Tejash12345/chatterTime_app-.git',
       demo: 'https://chattertime-app.onrender.com/',
       featured: true
@@ -127,7 +127,7 @@ const Projects = () => {
       title: 'TuneTime.app – Music Streaming Platform',
       description: 'A Spotify-style full-stack music app with real-time chat, playback control, admin dashboard for albums, and user activity feeds. Built with MERN stack, Socket.io, and Cloudinary for uploads.',
       technologies: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'Cloudinary', 'Tailwind CSS', 'Shadcn UI', 'Zustand', 'Redux', 'Chart.js'],
-      image: 'https://images.pexels.com/photos/164931/pexels-photo-164931.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467436/Screenshot_2025-07-02_172305_pzvazq.png',
       github: 'https://github.com/Tejash12345/tunetimepro.git',
       demo: 'https://tunetimepro-1.onrender.com/',
       featured: true
@@ -136,7 +136,7 @@ const Projects = () => {
       title: 'Pure Pattry – Food Ordering App',
       description: 'A full-stack MERN food ordering platform featuring user auth, menu browsing, cart management, and admin control for restaurant orders and menus.',
       technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Stripe API', 'Tailwind CSS'],
-      image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467603/Screenshot_2025-07-02_172636_e2sm3m.png',
       github: 'https://github.com/Tejash12345/project_purepattry.git',
       demo: 'https://frontendp-xi.vercel.app/',
       featured: false
@@ -145,7 +145,7 @@ const Projects = () => {
       title: '3D Portfolio Website',
       description: 'A dynamic and interactive portfolio built with React and Tailwind CSS, featuring 3D elements, Email.js integration, and smooth animations for showcasing projects and skills.',
       technologies: ['React.js', 'Tailwind CSS', 'Email.js', 'JavaScript', 'HTML5'],
-      image: 'https://images.pexels.com/photos/3806751/pexels-photo-3806751.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467618/Screenshot_2025-07-02_172744_mxkljd.png',
       github: 'https://github.com/Tejash12345/protfolio3-D.git',
       demo: 'https://portjhbfdjk.netlify.app/',
       featured: false
