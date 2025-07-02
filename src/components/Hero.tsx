@@ -15,10 +15,14 @@ const Hero = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20"></div>
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)',
-          backgroundSize: '50px 50px'
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)',
+            backgroundSize: '50px 50px',
+          }}
+        ></div>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -33,7 +37,7 @@ const Hero = () => {
             Passionate about creating exceptional web applications using the MERN stack. 
             Ready to bring innovative ideas to life through clean code and modern technologies.
           </p>
-          
+
           <div className="flex justify-center space-x-6 mb-12">
             <a
               href="https://github.com/Tejash12345"
@@ -68,7 +72,7 @@ const Hero = () => {
               <ChevronDown size={20} className="ml-2 animate-bounce" />
             </button>
             <a
-              href="/Arava_Tejesh_Kumar_Resume (2).pdf"
+              href="/Arava_Tejesh_Kumar_Resume%20%282%29.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -90,3 +94,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
