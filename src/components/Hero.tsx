@@ -68,7 +68,7 @@ const Hero = () => {
               <ChevronDown size={20} className="ml-2 animate-bounce" />
             </button>
             <a
-              href="/uploads/Arava_Tejesh_Kumar_Resume (7).pdf"
+              href="/Arava_Tejesh_Kumar_Resume (2).pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
