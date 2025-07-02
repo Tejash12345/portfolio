@@ -10,10 +10,7 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [isResumeUploaded, setIsResumeUploaded] = useState(false);
   const [isUsingMongo, setIsUsingMongo] = useState(false);
-  const [hasResume, setHasResume] = useState(false);
 
   useEffect(() => {
     checkResumeExists();
@@ -26,7 +23,6 @@ const Contact = () => {
       if (mongoAvailable) {
         const mongoResume = await MongoStorage.getResume();
         if (mongoResume) {
-          setHasResume(true);
           setIsUsingMongo(true);
           return;
         }
@@ -35,7 +31,6 @@ const Contact = () => {
       // Fallback to localStorage
       const localResume = localStorage.getItem('userResume');
       if (localResume) {
-        setHasResume(true);
         setIsUsingMongo(false);
       }
     } catch (error) {
@@ -57,76 +52,6 @@ const Contact = () => {
     setIsSubmitted(true);
     setTimeout(() => setIsSubmitted(false), 3000);
     setFormData({ name: '', email: '', subject: '', message: '' });
-  };
-
-  const handleResumeUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && file.type === 'application/pdf') {
-      setResumeFile(file);
-      
-      // Convert file to base64
-      const reader = new FileReader();
-      reader.onload = async (event) => {
-        const result = event.target?.result as string;
-        
-        // Try to save to MongoDB first
-        try {
-          const mongoAvailable = await MongoStorage.isAvailable();
-          if (mongoAvailable) {
-            const success = await MongoStorage.saveResume(result, file.name);
-            if (success) {
-              setIsUsingMongo(true);
-              setHasResume(true);
-              setIsResumeUploaded(true);
-              setTimeout(() => setIsResumeUploaded(false), 3000);
-              return;
-            }
-          }
-        } catch (error) {
-          console.error('MongoDB save failed, using localStorage:', error);
-        }
-
-        // Fallback to localStorage
-        localStorage.setItem('userResume', result);
-        setIsUsingMongo(false);
-        setHasResume(true);
-        setIsResumeUploaded(true);
-        setTimeout(() => setIsResumeUploaded(false), 3000);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert('Please upload a PDF file only.');
-    }
-  };
-
-  const handleDownloadResume = async () => {
-    try {
-      let resumeData = null;
-
-      // Try MongoDB first
-      if (isUsingMongo) {
-        resumeData = await MongoStorage.getResume();
-      }
-
-      // Fallback to localStorage
-      if (!resumeData) {
-        resumeData = localStorage.getItem('userResume');
-      }
-
-      if (resumeData) {
-        const link = document.createElement('a');
-        link.href = resumeData;
-        link.download = 'Arava_Tejesh_Kumar_Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        alert('No resume found. Please upload your resume first.');
-      }
-    } catch (error) {
-      console.error('Failed to download resume:', error);
-      alert('Failed to download resume. Please try again.');
-    }
   };
 
   return (
@@ -190,65 +115,6 @@ const Contact = () => {
                   <p className="text-slate-300">Location</p>
                   <p className="text-white">Rayadurg, Andhra Pradesh</p>
                 </div>
-              </div>
-            </div>
-
-            {/* Resume Upload/Download Section */}
-            <div className="p-6 bg-slate-800 rounded-2xl mb-8">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
-                <FileText className="w-5 h-5 mr-2" />
-                Resume Management
-              </h4>
-              
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="resume-upload" className="block text-sm font-medium text-slate-300 mb-2">
-                    Upload Resume (PDF only)
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="file"
-                      id="resume-upload"
-                      accept=".pdf"
-                      onChange={handleResumeUpload}
-                      className="hidden"
-                    />
-                    <label
-                      htmlFor="resume-upload"
-                      className="flex items-center justify-center w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"
-                    >
-                      {isResumeUploaded ? (
-                        <>
-                          <CheckCircle className="w-5 h-5 mr-2" />
-                          <span>Resume Uploaded Successfully!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Upload className="w-5 h-5 mr-2" />
-                          <span>Choose PDF File</span>
-                        </>
-                      )}
-                    </label>
-                  </div>
-                  {resumeFile && (
-                    <p className="text-sm text-slate-400 mt-2">
-                      Selected: {resumeFile.name}
-                    </p>
-                  )}
-                </div>
-
-                <button
-                  onClick={handleDownloadResume}
-                  disabled={!hasResume}
-                  className={`w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors ${
-                    hasResume
-                      ? 'bg-green-600 text-white hover:bg-green-700'
-                      : 'bg-slate-600 text-slate-400 cursor-not-allowed'
-                  }`}
-                >
-                  <Download className="w-5 h-5" />
-                  <span>Download Resume</span>
-                </button>
               </div>
             </div>
 

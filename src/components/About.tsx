@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { User, Heart, Target, Zap, Upload, Camera, Cloud, HardDrive } from 'lucide-react';
+import { Heart, Target, Zap, Upload, Camera, Cloud, HardDrive } from 'lucide-react';
 import { MongoStorage } from '../utils/mongoStorage';
 
 const About = () => {
+  const defaultImageUrl = "https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467897/WhatsApp_Image_2025-07-02_at_18.03.26_c682df27_siuwht.jpg";
+
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [isUsingMongo, setIsUsingMongo] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +16,6 @@ const About = () => {
   const loadProfileImage = async () => {
     setIsLoading(true);
     try {
-      // Try MongoDB first
       const mongoAvailable = await MongoStorage.isAvailable();
       if (mongoAvailable) {
         const mongoImageUrl = await MongoStorage.getImage('profileImage');
@@ -26,14 +27,18 @@ const About = () => {
         }
       }
 
-      // Fallback to localStorage
       const localImage = localStorage.getItem('profileImage');
       if (localImage) {
         setProfileImage(localImage);
         setIsUsingMongo(false);
+      } else {
+        // Default fallback image
+        setProfileImage(defaultImageUrl);
+        setIsUsingMongo(false);
       }
     } catch (error) {
       console.error('Failed to load profile image:', error);
+      setProfileImage(defaultImageUrl);
     }
     setIsLoading(false);
   };
@@ -41,7 +46,6 @@ const About = () => {
   const handleProfileImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && file.type.startsWith('image/')) {
-      // Check file size (limit to 5MB)
       if (file.size > 5 * 1024 * 1024) {
         alert('Image size should be less than 5MB');
         return;
@@ -52,7 +56,6 @@ const About = () => {
         const result = event.target?.result as string;
         setProfileImage(result);
 
-        // Try to save to MongoDB first
         try {
           const mongoAvailable = await MongoStorage.isAvailable();
           if (mongoAvailable) {
@@ -66,7 +69,6 @@ const About = () => {
           console.error('MongoDB save failed, using localStorage:', error);
         }
 
-        // Fallback to localStorage
         localStorage.setItem('profileImage', result);
         setIsUsingMongo(false);
       };
@@ -76,8 +78,6 @@ const About = () => {
     }
   };
 
-  const imageUrl = "https://res.cloudinary.com/diqqtjz0i/image/upload/v1751467897/WhatsApp_Image_2025-07-02_at_18.03.26_c682df27_siuwht.jpg";
-
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,8 +86,8 @@ const About = () => {
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             A passionate BTech student ready to make an impact in the world of technology.
           </p>
-          
-          {/* Storage Status Indicator */}
+
+          {/* Storage Status */}
           <div className="mt-4 flex justify-center">
             <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-sm ${
               isUsingMongo 
@@ -106,16 +106,14 @@ const About = () => {
               <div className="w-full h-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center overflow-hidden relative">
                 {isLoading ? (
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                ) : profileImage ? (
+                ) : (
                   <img
-                    src={imageUrl}
+                    src={profileImage || defaultImageUrl}
                     alt="Arava Tejesh Kumar"
                     className="w-full h-full object-cover rounded-2xl"
                   />
-                ) : (
-                  <User size={120} className="text-slate-400" />
                 )}
-                
+
                 {/* Upload overlay */}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
                   <div className="flex flex-col items-center space-y-3">
@@ -127,7 +125,7 @@ const About = () => {
                     </label>
                   </div>
                 </div>
-                
+
                 <input
                   type="file"
                   id="profile-upload"
@@ -137,8 +135,8 @@ const About = () => {
                 />
               </div>
             </div>
-            
-            {/* Upload button for mobile/accessibility */}
+
+            {/* Mobile Upload Button */}
             <div className="text-center lg:hidden space-y-3">
               <label htmlFor="profile-upload-mobile" className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
                 <Upload size={16} className="mr-2" />

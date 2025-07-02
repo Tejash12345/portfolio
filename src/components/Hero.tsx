@@ -10,37 +10,6 @@ const Hero = () => {
     }
   };
 
-  const handleDownloadResume = async () => {
-    try {
-      let resumeData = null;
-
-      // Try MongoDB first
-      const mongoAvailable = await MongoStorage.isAvailable();
-      if (mongoAvailable) {
-        resumeData = await MongoStorage.getResume();
-      }
-
-      // Fallback to localStorage
-      if (!resumeData) {
-        resumeData = localStorage.getItem('userResume');
-      }
-
-      if (resumeData) {
-        const link = document.createElement('a');
-        link.href = resumeData;
-        link.download = 'Arava_Tejesh_Kumar_Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        alert('No resume found. Please upload your resume first.');
-      }
-    } catch (error) {
-      console.error('Failed to download resume:', error);
-      alert('Failed to download resume. Please try again.');
-    }
-  };
-
   return (
     <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
       {/* Background Pattern */}
@@ -98,14 +67,16 @@ const Hero = () => {
               Discover My Work
               <ChevronDown size={20} className="ml-2 animate-bounce" />
             </button>
-            
-            <button
-              onClick={handleDownloadResume}
+            <a
+              href="/uploads/Arava_Tejesh_Kumar_Resume (7).pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              download
             >
               <Download size={20} className="mr-2" />
               Download Resume
-            </button>
+            </a>
           </div>
         </div>
       </div>
