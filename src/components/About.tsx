@@ -1,5 +1,6 @@
 import { Briefcase, Cloud, Lightbulb, Workflow } from 'lucide-react';
 import Section from './Section';
+import CountUp from './CountUp';
 import { about } from '../data/profile';
 
 const icons = [Briefcase, Lightbulb, Cloud, Workflow];
@@ -14,9 +15,11 @@ export default function About() {
           ))}
           <dl className="grid grid-cols-3 gap-4 pt-6">
             {about.stats.map((s) => (
-              <div key={s.label} className="holo-card p-4 text-center">
+              <div key={s.label} className="holo-card stat-card p-4 text-center">
                 <dt className="text-xs text-white/50">{s.label}</dt>
-                <dd className="holo-text mt-1 text-2xl font-bold sm:text-3xl">{s.value}</dd>
+                <dd className="holo-text mt-1 text-2xl font-bold tabular-nums sm:text-3xl">
+                  <CountUp value={s.value} />
+                </dd>
               </div>
             ))}
           </dl>

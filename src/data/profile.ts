@@ -159,3 +159,81 @@ export const skills = [
   { group: 'Data', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
   { group: 'Growth', items: ['SEO', 'Meta Ads', 'Business Analysis', 'FinTech'] },
 ];
+
+// Devicon file for each skill; `dark` icons are inverted so they show on the dark page.
+const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons';
+export const skillIcons: Record<string, { src: string; dark?: boolean }> = {
+  Angular: { src: `${DEVICON}/angular/angular-original.svg` },
+  React: { src: `${DEVICON}/react/react-original.svg` },
+  TypeScript: { src: `${DEVICON}/typescript/typescript-original.svg` },
+  JavaScript: { src: `${DEVICON}/javascript/javascript-original.svg` },
+  'Next.js': { src: `${DEVICON}/nextjs/nextjs-original.svg`, dark: true },
+  'Tailwind CSS': { src: `${DEVICON}/tailwindcss/tailwindcss-original.svg` },
+  'Figma to code': { src: `${DEVICON}/figma/figma-original.svg` },
+  Java: { src: `${DEVICON}/java/java-original.svg` },
+  'Spring Boot': { src: `${DEVICON}/spring/spring-original.svg` },
+  'Node.js': { src: `${DEVICON}/nodejs/nodejs-original.svg` },
+  Express: { src: `${DEVICON}/express/express-original.svg`, dark: true },
+  FastAPI: { src: `${DEVICON}/fastapi/fastapi-original.svg` },
+  AWS: { src: `${DEVICON}/amazonwebservices/amazonwebservices-plain-wordmark.svg`, dark: true },
+  'GitHub Actions': { src: `${DEVICON}/githubactions/githubactions-original.svg` },
+  Docker: { src: `${DEVICON}/docker/docker-original.svg` },
+  Vercel: { src: `${DEVICON}/vercel/vercel-original.svg`, dark: true },
+  Git: { src: `${DEVICON}/git/git-original.svg` },
+  PostgreSQL: { src: `${DEVICON}/postgresql/postgresql-original.svg` },
+  MongoDB: { src: `${DEVICON}/mongodb/mongodb-original.svg` },
+  MySQL: { src: `${DEVICON}/mysql/mysql-original.svg` },
+};
+
+export const process = [
+  {
+    step: '01',
+    title: 'Figma design',
+    text: 'Start from the user and the business goal. Read the Figma file, agree on flows, states and edge cases before writing code.',
+  },
+  {
+    step: '02',
+    title: 'Angular build',
+    text: 'Turn the design into pixel-perfect, responsive components, wired to Spring Boot APIs, with tests and code review.',
+  },
+  {
+    step: '03',
+    title: 'Live on AWS',
+    text: 'Ship through CI/CD to AWS, then watch real usage, SEO and feedback, and improve in small, safe releases.',
+  },
+];
+
+export const caseStudies = [
+  {
+    name: 'XChangepe App · New UI',
+    problem: 'The older interface felt crowded, and key actions were hard to find, especially on smaller screens.',
+    built: [
+      'Rebuilt the dashboard from a fresh Figma design with a clear layout and navigation.',
+      'Created reusable components (cards, tables, forms, modals) so new screens are quick and consistent.',
+      'Made every page responsive, with form validation and clear loading and error states.',
+    ],
+    tech: ['Angular', 'TypeScript', 'REST APIs', 'Figma'],
+    image: '/work/xchangepe-new-ui.jpg',
+  },
+  {
+    name: 'Fairexpay & XChangepe websites',
+    problem: 'The websites needed to load fast, be easy to find on Google, and show which campaigns bring in leads.',
+    built: [
+      'Built responsive pages from Figma designs, tuned for speed on mobile.',
+      'Added SEO: meta tags, structured data, sitemaps and clean URLs.',
+      'Integrated Meta Ads tracking so campaign leads can be measured.',
+    ],
+    tech: ['Angular', 'SEO', 'Meta Ads', 'AWS'],
+    image: '/work/fairexpay.jpg',
+  },
+];
+
+export const learning = [
+  'System design',
+  'Microservices with Spring Boot',
+  'AWS Solutions Architect',
+  'Docker & Kubernetes',
+  'AI / LLM integration',
+  'Three.js & WebGL',
+  'Payments & compliance',
+];

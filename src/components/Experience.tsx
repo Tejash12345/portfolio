@@ -1,16 +1,39 @@
+import { useEffect, useRef } from 'react';
 import Section from './Section';
 import { experience } from '../data/profile';
 
 export default function Experience() {
+  const list = useRef<HTMLOListElement>(null);
+
+  // The glowing line fills as the timeline scrolls through the viewport.
+  useEffect(() => {
+    const el = list.current;
+    if (!el) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      const mid = window.innerHeight * 0.6;
+      const p = Math.min(Math.max((mid - r.top) / r.height, 0), 1);
+      el.style.setProperty('--progress', p.toFixed(3));
+    };
+    const onScroll = () => raf || (raf = requestAnimationFrame(update));
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <Section id="experience" kicker="02 · Experience" title="Where I build.">
-      <ol className="relative space-y-8 border-l border-white/10 pl-6 sm:pl-10">
-        {experience.map((e) => (
+      <ol ref={list} className="timeline relative space-y-8 pl-8 sm:pl-12">
+        {experience.map((e, i) => (
           <li key={e.role} className="relative">
-            <span
-              aria-hidden="true"
-              className="absolute -left-[31px] top-7 h-3 w-3 rounded-full bg-[var(--cyan)] shadow-[0_0_16px_var(--cyan)] sm:-left-[47px]"
-            />
+            <span aria-hidden="true" className={`timeline-dot ${i === 0 ? 'is-live' : ''}`} />
             <article className="holo-card p-6 sm:p-8">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <div>

@@ -113,3 +113,94 @@ body {
 .reveal.is-visible { opacity: 1; transform: none; }
 
 :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- Stats ---------- */
+.stat-card { overflow: hidden; }
+.stat-card::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(125, 249, 255, 0.12) 50%, transparent 70%);
+  transform: translateX(-100%); animation: sheen 4s ease-in-out infinite;
+}
+@keyframes sheen { 60%, 100% { transform: translateX(100%); } }
+
+/* ---------- Experience timeline ---------- */
+.timeline { --progress: 0; }
+.timeline::before, .timeline::after {
+  content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; border-radius: 2px;
+}
+.timeline::before { background: rgba(255, 255, 255, 0.08); }
+.timeline::after {
+  background: linear-gradient(var(--cyan), var(--violet), var(--pink));
+  box-shadow: 0 0 12px var(--cyan);
+  transform-origin: top; transform: scaleY(var(--progress));
+  transition: transform 0.15s linear;
+}
+.timeline-dot {
+  position: absolute; z-index: 1; top: 1.9rem; left: calc(-2rem + 2px);
+  width: 12px; height: 12px; border-radius: 999px;
+  background: var(--bg); border: 2px solid var(--cyan); box-shadow: 0 0 14px var(--cyan);
+}
+@media (min-width: 640px) { .timeline-dot { left: calc(-3rem + 2px); } }
+.timeline-dot.is-live { background: var(--cyan); }
+.timeline-dot.is-live::after {
+  content: ''; position: absolute; inset: -6px; border-radius: inherit;
+  border: 2px solid var(--cyan); animation: ping 1.8s ease-out infinite;
+}
+@keyframes ping { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+
+/* ---------- Skills ---------- */
+.skill-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 0.25rem; border-radius: 0.9rem; text-align: center;
+  font-size: 0.7rem; line-height: 1.2; color: rgba(232, 236, 255, 0.75);
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(125, 249, 255, 0.1);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+.skill-tile img, .skill-tile svg { filter: drop-shadow(0 0 6px rgba(125, 249, 255, 0.35)); transition: filter 0.25s ease, transform 0.25s ease; }
+.skill-tile img.invert { filter: invert(1) drop-shadow(0 0 6px rgba(125, 249, 255, 0.45)); }
+.skill-tile:hover {
+  transform: translateY(-3px); color: #fff; border-color: rgba(125, 249, 255, 0.5);
+  box-shadow: 0 0 24px -6px var(--cyan), inset 0 0 18px -10px var(--cyan);
+}
+.skill-tile:hover img, .skill-tile:hover svg { transform: scale(1.12); filter: drop-shadow(0 0 12px rgba(125, 249, 255, 0.9)); }
+.skill-tile:hover img.invert { filter: invert(1) drop-shadow(0 0 12px rgba(125, 249, 255, 0.9)); }
+
+/* ---------- Currently learning marquee ---------- */
+.live-dot {
+  display: inline-block; width: 8px; height: 8px; margin-right: 0.5rem; border-radius: 999px;
+  background: var(--pink); box-shadow: 0 0 10px var(--pink); animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink { 50% { opacity: 0.3; } }
+.marquee {
+  overflow: hidden; flex: 1; min-width: 0;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.marquee-track { display: flex; gap: 0.6rem; width: max-content; animation: marquee 28s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(calc(-50% - 0.3rem)); } }
+
+/* ---------- How I work ---------- */
+.process-line {
+  position: absolute; left: 10%; right: 10%; top: 5.5rem; height: 2px; z-index: -1;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--pink), transparent);
+  background-size: 200% 100%; animation: holo-shift 4s linear infinite; opacity: 0.6;
+}
+.cursor-anim { animation: cursor-move 4s ease-in-out infinite; }
+@keyframes cursor-move {
+  0%, 100% { transform: translate(60px, 50px); }
+  40% { transform: translate(112px, 30px); }
+  70% { transform: translate(40px, 64px); }
+}
+.type-line { transform-box: fill-box; transform-origin: left; animation: type 4.2s ease-in-out infinite; }
+@keyframes type { 0% { transform: scaleX(0); } 25%, 85% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+.pulse-line { stroke-dasharray: 160; stroke-dashoffset: 160; animation: draw 2.4s linear infinite; }
+@keyframes draw { to { stroke-dashoffset: -160; } }
+
+/* ---------- Glow cursor ---------- */
+.glow-cursor {
+  position: fixed; left: -200px; top: -200px; width: 400px; height: 400px; z-index: 0;
+  pointer-events: none; border-radius: 999px; opacity: 0; transition: opacity 0.4s ease;
+  background: radial-gradient(circle, rgba(125, 249, 255, 0.12), rgba(155, 123, 255, 0.07) 35%, transparent 65%);
+  mix-blend-mode: screen;
+}

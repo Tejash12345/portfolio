@@ -38,7 +38,7 @@ function CardBody({ site }: { site: WorkSite }) {
 export default function Work() {
   const card = 'holo-card group flex h-full flex-col overflow-hidden';
   return (
-    <Section id="work" kicker="03 · Live work" title="Sites and apps I've built at work.">
+    <Section id="work" kicker="04 · Live work" title="Sites and apps I've built at work.">
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {workSites.map((s) => (
           <li key={s.name}>

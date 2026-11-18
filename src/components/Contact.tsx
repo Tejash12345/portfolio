@@ -34,7 +34,7 @@ export default function Contact() {
   const sending = status.state === 'sending';
 
   return (
-    <Section id="contact" kicker="06 · Contact" title="Let's build something.">
+    <Section id="contact" kicker="08 · Contact" title="Let's build something.">
       <div className="grid gap-8 lg:grid-cols-2">
         <ul className="space-y-4">
           {[
