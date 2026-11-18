@@ -19,7 +19,7 @@ export const about = {
   ],
   strengths: [
     { title: 'Business understanding', text: 'Payments, settlements, KYC and forex workflows.' },
-    { title: 'Design to code', text: 'Figma designs built into pixel-perfect, responsive websites and web apps.' },
+    { title: 'Problem solving', text: 'Turning business needs into simple, scalable products.' },
     { title: 'Cloud', text: 'AWS: EC2, S3, Cognito, RDS, Amplify, API Gateway.' },
     { title: 'Automation', text: 'CI/CD pipelines, automated testing and quality reports.' },
   ],
