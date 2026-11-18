@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import Section from './Section';
+import GitShowcase from './GitShowcase';
 import { projects, type Project } from '../data/profile';
 
 function TiltCard({ project }: { project: Project }) {
@@ -59,6 +60,7 @@ export default function Projects() {
           <TiltCard key={p.title} project={p} />
         ))}
       </div>
+      <GitShowcase />
     </Section>
   );
 }
