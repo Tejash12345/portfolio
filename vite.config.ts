@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  optimizeDeps: {
-    exclude: ['lucide-react'],
+  build: {
+    // The 3D scene is lazy-loaded after first paint, so its larger chunk is expected.
+    chunkSizeWarningLimit: 900,
   },
 });

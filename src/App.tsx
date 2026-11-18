@@ -1,38 +1,29 @@
-import React, { useEffect } from 'react';
-import Header from './components/Header';
+import Nav from './components/Nav';
 import Hero from './components/Hero';
 import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
 import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
-function App() {
-  useEffect(() => {
-    // Add smooth scrolling behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Update document title
-    document.title = 'Arava Tejesh Kumar - Full Stack Developer';
-    
-    return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
-    };
-  }, []);
-
+export default function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
+    <>
+      <div className="holo-grid" aria-hidden="true" />
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-black focus:px-3 focus:py-2">
+        Skip to content
+      </a>
+      <Nav />
+      <main id="main">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Contact />
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }
-
-export default App;

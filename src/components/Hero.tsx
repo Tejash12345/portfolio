@@ -1,97 +1,62 @@
-import React from 'react';
-import { ChevronDown, Github, Linkedin, Mail, Download } from 'lucide-react';
-import { MongoStorage } from '../utils/mongoStorage';
+import { lazy, Suspense } from 'react';
+import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { profile } from '../data/profile';
 
-const Hero = () => {
-  const scrollToAbout = () => {
-    const element = document.getElementById('about');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+// Three.js loads after the text so the page is readable (and indexable) immediately.
+const HoloScene = lazy(() => import('./HoloScene'));
 
+export default function Hero() {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20"></div>
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)',
-            backgroundSize: '50px 50px',
-          }}
-        ></div>
+    <section id="home" className="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
+      <div className="absolute inset-0 md:left-[35%]" aria-hidden="true">
+        <Suspense fallback={null}>
+          <HoloScene />
+        </Suspense>
       </div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#05060d] via-[#05060d]/70 to-transparent md:via-[#05060d]/40"
+      />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div className="animate-fade-in-up">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-            Arava Tejesh Kumar
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-light mb-8 text-blue-200">
-            Full Stack Developer & BTech Student
-          </h2>
-          <p className="text-lg md:text-xl mb-12 text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Passionate about creating exceptional web applications using the MERN stack. 
-            Ready to bring innovative ideas to life through clean code and modern technologies.
-          </p>
+      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <p className="section-kicker">{profile.tagline}</p>
+        <h1 className="mt-5 text-5xl font-bold leading-[1.05] sm:text-7xl">
+          {profile.name.split(' ').slice(0, 1)}
+          <br />
+          <span className="holo-text">{profile.name.split(' ').slice(1).join(' ')}</span>
+        </h1>
+        <p className="mt-6 font-mono text-sm text-[var(--cyan)] sm:text-base">&gt; {profile.role}</p>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">{profile.intro}</p>
 
-          <div className="flex justify-center space-x-6 mb-12">
-            <a
-              href="https://github.com/Tejash12345"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="http://linkedin.com/in/tejesh-kumar-a9348a302"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href="mailto:tejraj0078@gmail.com"
-              className="p-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
-            >
-              <Mail size={24} />
-            </a>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
-            <button
-              onClick={scrollToAbout}
-              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              Discover My Work
-              <ChevronDown size={20} className="ml-2 animate-bounce" />
-            </button>
-            <a
-              href="/Arava_Tejesh_Kumar_Resume%20%282%29.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              download
-            >
-              <Download size={20} className="mr-2" />
-              Download Resume
-            </a>
-          </div>
+        <div className="mt-10 flex flex-wrap gap-4">
+          <a href="#projects" className="btn-holo">
+            View my work <ArrowDown size={18} />
+          </a>
+          <a href={profile.resume} className="btn-ghost" download>
+            <Download size={18} /> Resume
+          </a>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ChevronDown size={32} className="text-white/50" />
+        <ul className="mt-10 flex gap-3" aria-label="Social links">
+          {[
+            { href: profile.github, label: 'GitHub', Icon: Github },
+            { href: profile.linkedin, label: 'LinkedIn', Icon: Linkedin },
+            { href: `mailto:${profile.email}`, label: 'Email', Icon: Mail },
+          ].map(({ href, label, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                aria-label={label}
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/5 transition hover:border-[var(--cyan)] hover:text-[var(--cyan)]"
+              >
+                <Icon size={18} />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
-};
-
-export default Hero;
-
+}
