@@ -19,7 +19,7 @@ export const about = {
   ],
   strengths: [
     { title: 'Business understanding', text: 'Payments, settlements, KYC and forex workflows.' },
-    { title: 'Problem solving', text: 'Turning business needs into simple, scalable products.' },
+    { title: 'Design to code', text: 'Figma designs built into pixel-perfect, responsive websites and web apps.' },
     { title: 'Cloud', text: 'AWS: EC2, S3, Cognito, RDS, Amplify, API Gateway.' },
     { title: 'Automation', text: 'CI/CD pipelines, automated testing and quality reports.' },
   ],
@@ -38,6 +38,7 @@ export const experience = [
     place: 'Bengaluru · On-site',
     points: [
       'Building cross-border payment products (XChangepe, SaveDesk / XChangepe TMS and Fairexpay Travel) with business and operations teams.',
+      'Turning Figma designs into pixel-perfect, responsive websites and web apps.',
       'Developing responsive Angular front ends connected to Java Spring Boot APIs.',
       'Deploying and running applications on AWS.',
       'Implemented SEO and Meta Ads integration for the XChangepe and Fairexpay websites to improve visibility and lead tracking.',
@@ -152,7 +153,7 @@ export const projects: Project[] = [
 ];
 
 export const skills = [
-  { group: 'Frontend & UI', items: ['Angular', 'React', 'TypeScript', 'JavaScript', 'Next.js', 'Tailwind CSS', 'Figma'] },
+  { group: 'Frontend & UI', items: ['Angular', 'React', 'TypeScript', 'JavaScript', 'Next.js', 'Tailwind CSS', 'Figma to code'] },
   { group: 'Backend', items: ['Java', 'Spring Boot', 'Node.js', 'Express', 'REST APIs', 'FastAPI'] },
   { group: 'Cloud & DevOps', items: ['AWS', 'CI/CD', 'GitHub Actions', 'Docker', 'Vercel', 'Git'] },
   { group: 'Data', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
