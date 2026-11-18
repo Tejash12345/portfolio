@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'Arava Tejesh Kumar',
+  name: 'Tejesh Kumar',
   shortName: 'Tejesh Kumar',
   role: 'Software Developer @ Fairexpay',
   tagline: 'Ideas → Impact',
@@ -9,7 +9,7 @@ export const profile = {
   email: 'tejraj0078@gmail.com',
   linkedin: 'https://www.linkedin.com/in/tejeshkumar-dev',
   github: 'https://github.com/Tejash12345',
-  resume: '/Arava_Tejesh_Kumar_Resume.pdf',
+  resume: '/Tejesh_Kumar_Resume.pdf',
 };
 
 export const about = {
