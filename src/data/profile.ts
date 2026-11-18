@@ -24,7 +24,7 @@ export const about = {
     { title: 'Automation', text: 'CI/CD pipelines, automated testing and quality reports.' },
   ],
   stats: [
-    { value: '5', label: 'Live work sites' },
+    { value: '6', label: 'Work sites & apps' },
     { value: '6+', label: 'Personal projects' },
     { value: '2025', label: 'BTech, ECE' },
   ],
@@ -53,9 +53,15 @@ export const experience = [
   },
 ];
 
-export type WorkSite = { name: string; type: string; text: string; url: string; image: string };
+export type WorkSite = { name: string; type: string; text: string; url?: string; image: string };
 
 export const workSites: WorkSite[] = [
+  {
+    name: 'XChangepe App · New UI',
+    type: 'In development',
+    text: 'Redesigned web app with a clean dashboard, responsive layout and reusable components. Built with Angular 21.',
+    image: '/work/xchangepe-new-ui.jpg',
+  },
   {
     name: 'Fairexpay',
     type: 'Website',
@@ -146,7 +152,7 @@ export const projects: Project[] = [
 ];
 
 export const skills = [
-  { group: 'Frontend', items: ['Angular', 'React', 'TypeScript', 'JavaScript', 'Next.js', 'Tailwind CSS'] },
+  { group: 'Frontend & UI', items: ['Angular', 'React', 'TypeScript', 'JavaScript', 'Next.js', 'Tailwind CSS', 'Figma'] },
   { group: 'Backend', items: ['Java', 'Spring Boot', 'Node.js', 'Express', 'REST APIs', 'FastAPI'] },
   { group: 'Cloud & DevOps', items: ['AWS', 'CI/CD', 'GitHub Actions', 'Docker', 'Vercel', 'Git'] },
   { group: 'Data', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
