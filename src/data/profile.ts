@@ -24,7 +24,7 @@ export const about = {
     { title: 'Automation', text: 'CI/CD pipelines, automated testing and quality reports.' },
   ],
   stats: [
-    { value: '3', label: 'Fintech products' },
+    { value: '5', label: 'Live work sites' },
     { value: '6+', label: 'Personal projects' },
     { value: '2025', label: 'BTech, ECE' },
   ],
@@ -53,10 +53,44 @@ export const experience = [
   },
 ];
 
-export const workProducts = [
-  { name: 'XChangepe', text: 'Payment collection platform for Indian exporters: invoices, INR settlement, card payments and KYC.' },
-  { name: 'SaveDesk / XChangepe TMS', text: 'Internal operations platform for the payments team.' },
-  { name: 'Fairexpay Travel', text: 'Travel forex platform for students, travellers and travel partners.' },
+export type WorkSite = { name: string; type: string; text: string; url: string; image: string };
+
+export const workSites: WorkSite[] = [
+  {
+    name: 'Fairexpay',
+    type: 'Website',
+    text: 'Responsive company website with fast, SEO-friendly pages.',
+    url: 'https://www.fairexpay.com/',
+    image: '/work/fairexpay.jpg',
+  },
+  {
+    name: 'XChangepe',
+    type: 'Website',
+    text: 'Responsive company website with modern UI and SEO.',
+    url: 'https://www.xchangepe.com/',
+    image: '/work/xchangepe.jpg',
+  },
+  {
+    name: 'XChangepe App',
+    type: 'Web application',
+    text: 'Customer web app with secure sign-in and dashboards.',
+    url: 'https://live.xchangepe.com/pages/login',
+    image: '/work/xchangepe-app.jpg',
+  },
+  {
+    name: 'XChangepe TMS',
+    type: 'Web application',
+    text: 'Dashboard-based web app with secure sign-in.',
+    url: 'https://tms.xchangepe.com/',
+    image: '/work/xchangepe-tms.jpg',
+  },
+  {
+    name: 'Fairexpay Travel',
+    type: 'Web application',
+    text: 'Partner web app with OTP sign-in and a clean, simple flow.',
+    url: 'https://travel.fairexpay.com/',
+    image: '/work/fairexpay-travel.jpg',
+  },
 ];
 
 export type Project = {

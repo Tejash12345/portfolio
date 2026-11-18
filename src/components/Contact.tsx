@@ -17,7 +17,7 @@ export default function Contact() {
     'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 outline-none transition focus:border-[var(--cyan)]';
 
   return (
-    <Section id="contact" kicker="05 · Contact" title="Let's build something.">
+    <Section id="contact" kicker="06 · Contact" title="Let's build something.">
       <div className="grid gap-8 lg:grid-cols-2">
         <ul className="space-y-4">
           {[

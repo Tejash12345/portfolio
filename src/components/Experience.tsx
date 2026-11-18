@@ -1,5 +1,5 @@
 import Section from './Section';
-import { experience, workProducts } from '../data/profile';
+import { experience } from '../data/profile';
 
 export default function Experience() {
   return (
@@ -33,16 +33,6 @@ export default function Experience() {
           </li>
         ))}
       </ol>
-
-      <h3 className="mt-16 font-mono text-sm uppercase tracking-[0.25em] text-white/50">Products I work on</h3>
-      <ul className="mt-6 grid gap-4 md:grid-cols-3">
-        {workProducts.map((p) => (
-          <li key={p.name} className="holo-card p-6">
-            <h4 className="text-lg font-semibold">{p.name}</h4>
-            <p className="mt-2 text-sm text-white/60">{p.text}</p>
-          </li>
-        ))}
-      </ul>
     </Section>
   );
 }

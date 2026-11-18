@@ -3,7 +3,7 @@ import { skills } from '../data/profile';
 
 export default function Skills() {
   return (
-    <Section id="skills" kicker="04 · Skills" title="My toolkit.">
+    <Section id="skills" kicker="05 · Skills" title="My toolkit.">
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {skills.map((s) => (
           <div key={s.group} className="holo-card p-6">

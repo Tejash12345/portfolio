@@ -53,7 +53,7 @@ function TiltCard({ project }: { project: Project }) {
 
 export default function Projects() {
   return (
-    <Section id="projects" kicker="03 · Projects" title="Things I've shipped.">
+    <Section id="projects" kicker="04 · Projects" title="Personal projects.">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((p) => (
           <TiltCard key={p.title} project={p} />
