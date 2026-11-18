@@ -1,20 +1,37 @@
 import { FormEvent, useState } from 'react';
-import { Github, Linkedin, Mail, MapPin, Send } from 'lucide-react';
+import { CheckCircle2, Github, Linkedin, Loader2, Mail, MapPin, Send } from 'lucide-react';
 import Section from './Section';
 import { profile } from '../data/profile';
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: '', subject: '', message: '' });
+const empty = { name: '', email: '', subject: '', message: '', website: '' };
+type Status = { state: 'idle' | 'sending' | 'sent' | 'error'; error?: string };
 
-  // No backend: open the visitor's mail app with the message filled in.
-  const submit = (e: FormEvent) => {
+export default function Contact() {
+  const [form, setForm] = useState(empty);
+  const [status, setStatus] = useState<Status>({ state: 'idle' });
+
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const body = `${form.message}\n\n— ${form.name}`;
-    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(body)}`;
+    setStatus({ state: 'sending' });
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Could not send right now.');
+      setForm(empty);
+      setStatus({ state: 'sent' });
+    } catch (err) {
+      setStatus({ state: 'error', error: err instanceof Error ? err.message : 'Could not send right now.' });
+    }
   };
 
+  const set = (key: keyof typeof empty) => (e: { target: { value: string } }) => setForm({ ...form, [key]: e.target.value });
   const field =
     'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 outline-none transition focus:border-[var(--cyan)]';
+  const sending = status.state === 'sending';
 
   return (
     <Section id="contact" kicker="06 · Contact" title="Let's build something.">
@@ -42,22 +59,41 @@ export default function Contact() {
           ))}
         </ul>
 
-        <form onSubmit={submit} className="holo-card space-y-4 p-6 sm:p-8">
-          <label className="block">
-            <span className="mb-2 block text-sm text-white/60">Name</span>
-            <input required className={field} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-          </label>
+        <form onSubmit={submit} className="holo-card space-y-4 p-6 sm:p-8" noValidate={false}>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className="mb-2 block text-sm text-white/60">Name</span>
+              <input required maxLength={100} autoComplete="name" className={field} value={form.name} onChange={set('name')} />
+            </label>
+            <label className="block">
+              <span className="mb-2 block text-sm text-white/60">Email</span>
+              <input required type="email" maxLength={200} autoComplete="email" className={field} value={form.email} onChange={set('email')} />
+            </label>
+          </div>
           <label className="block">
             <span className="mb-2 block text-sm text-white/60">Subject</span>
-            <input required className={field} value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} />
+            <input required maxLength={150} className={field} value={form.subject} onChange={set('subject')} />
           </label>
           <label className="block">
             <span className="mb-2 block text-sm text-white/60">Message</span>
-            <textarea required rows={5} className={`${field} resize-none`} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+            <textarea required rows={5} maxLength={5000} className={`${field} resize-none`} value={form.message} onChange={set('message')} />
           </label>
-          <button type="submit" className="btn-holo w-full justify-center">
-            <Send size={18} /> Send message
+          {/* Honeypot for bots; hidden from people and screen readers. */}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" value={form.website} onChange={set('website')} />
+
+          <button type="submit" disabled={sending} className="btn-holo w-full justify-center disabled:opacity-70">
+            {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+            {sending ? 'Sending…' : 'Send message'}
           </button>
+
+          <p role="status" aria-live="polite" className="min-h-[1.25rem] text-sm">
+            {status.state === 'sent' && (
+              <span className="inline-flex items-center gap-2 text-emerald-300">
+                <CheckCircle2 size={16} /> Thanks! Your message has been sent. I'll reply soon.
+              </span>
+            )}
+            {status.state === 'error' && <span className="text-rose-300">{status.error}</span>}
+          </p>
         </form>
       </div>
     </Section>
